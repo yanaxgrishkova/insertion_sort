@@ -1,49 +1,12 @@
 #include <iostream>
-#include <ctime>
-#include <iomanip>
+using namespace std;
 
-void insertionSort(int *arrayPtr, int length)
+template <typename Iterator>
+void insertion_sort(Iterator first, Iterator last)
 {
-	int temp, item;
-	for (int counter = 1; counter < length; counter++)
-	{
-		temp = arrayPtr[counter];
-		item = counter - 1;
-		while (item >= 0 && arrayPtr[item] > temp)
-		{
-			arrayPtr[item + 1] = arrayPtr[item];
-			arrayPtr[item] = temp;
-			item--;
-		}
-	}
-}
-
-int main()
-{
-	srand(time(NULL));
-	std::cout << "Please, enter size of array: ";
-	int size; 
-	std::cin >> size;
-
-	int *array = new int[size];
-	std::cout << "Array:" << std::endl;
-	for (int counter = 0; counter < size; counter++)
-	{
-		array[counter] = rand() % 10000;
-		std::cout << std::setw(2) << array[counter] << "  ";
-	}
-	std::cout << std::endl;
-
-	insertionSort(array, size); 
-
-	std::cout << "Sorted array:" << std::endl;
-	for (int counter = 0; counter < size; counter++)
-	{
-		std::cout << std::setw(4) << array[counter] << "  ";
-	}
-	std::cout << std::endl;
-
-	delete[] array; 
-	system("pause");
-	return 0;
+	if (first >= last)
+		return;
+	for (Iterator i = first; i != last; ++i)
+		for (Iterator j = i - 1; (j != first) && (*j < *(j - 1)); --j)
+			iter_swap((j - 1), j);
 }
