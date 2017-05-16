@@ -1,4 +1,4 @@
-#include <sort.hpp>
+#include <insertion_sort.hpp>
 #include <catch.hpp>
 
 SCENARIO("sort") 
